@@ -1,0 +1,3 @@
+#este es un comentario- ignora carpetas/archivos
+entorno_*
+#en el archivo gitignore podemos usar patrones, el * indica que representa todo los que figura despues o antes del signo
