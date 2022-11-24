@@ -22,6 +22,8 @@ class UsuarioManager(BaseUserManager):
         #is_staff → sirve par aindica si el usuario pertenece al equipo de trabajo y que puede tener acceos al panel administrativo ( el is_staff estara regido por los permisos que puede tener ese usuario)
         nuevoUsuario.is_staff = True
         #sirve para referencia a la base de datos por default en el caso que tengamos varias coenxiones a diferentes base de datos
+        #de momento el self._db estara vacio , por lo que usara la base da tos por defecto, dado el caso que tuvieramos mas de una conexion a db, tendriamos que especificar el valor , ejm.: using=otrabase
+        #https://stackoverflow.com/questions/57667334/what-is-the-value-of-self-db-by-default-in-django
         nuevoUsuario.save(using=self._db)
 
       
