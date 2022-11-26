@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from os import environ
 from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
@@ -42,9 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gestion',
+    'corsheaders', #para trabajar con el uso de cors
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -134,3 +137,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #https://docs.djangoproject.com/en/4.1/ref/settings/#auth-user-model
 #sirve para indicar cual sera el modelo que utilizaremos para el auth_user en nuestra bd
 AUTH_USER_MODEL = 'gestion.UsuarioModel'
+
+#La libreria Django RestFramework utilizara todas las configuraciones que definamos en esta variable para este proyecto
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        #la libreria de autenticacion que va a utilizar django framwork para poder autenticar al usuario entrante sera de la libreria simplejwt 
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        ],
+}
+
+#para modificar las configuraciones de la libreria simple-jwt usamos ↓
+SIMPLE_JWT = {
+    #para mas informacion
+    #https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1,hours=1,minutes=30, seconds=5, milliseconds=5),
+    #es la firma que s eutilizara para firmar y verificar los token
+    'SIGNING_KEY':environ.get('TOKEN_SECRET'),
+    #es el nombre con el cual se guardara en el payload el id del usuario
+    'USER_ID_CLAIM':'id_del_usuario'
+}
+#sirve para indicar a los CORS que origenes estan permitidos de hacer consultas
+CORS_ALLOWED_ORIGINS= ['http://127.0.0.1:5500', 'https://www.google.com']
