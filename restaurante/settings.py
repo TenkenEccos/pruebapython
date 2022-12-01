@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gestion',
     'corsheaders', #para trabajar con el uso de cors
+    'rest_framework',
+    #
 ]
 
 MIDDLEWARE = [
