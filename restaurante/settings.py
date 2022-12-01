@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -160,3 +161,5 @@ SIMPLE_JWT = {
 }
 #sirve para indicar a los CORS que origenes estan permitidos de hacer consultas
 CORS_ALLOWED_ORIGINS= ['http://127.0.0.1:5500', 'https://www.google.com']
+#sirve para indicar donde se guardaran los archivos estaticos (CSS, JS, HTML)utiliza Django y DRF
+STATIC_ROOT= BASE_DIR/ 'archivos_estaticos'

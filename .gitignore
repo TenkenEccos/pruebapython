@@ -3,3 +3,4 @@ entorno_*/
 #en el archivo gitignore podemos usar patrones, el * indica que representa todo los que figura despues o antes del signo
 .env
 __pycache__/
+archivos_estaticos/
